@@ -1,0 +1,8 @@
+{
+  "name": "Remix Dịch \u0026 Biên Tập Truyện AI v11.5.9 (1 Năm)",
+  "description": "Phiên bản v11.5.9: Chuyển 3 tác vụ ở Phân Tích Sâu (Quy Tắc Bổ Sung, Tóm Tắt Truyện, Thiết Kế Prompt Ảnh Bìa sau khi tổng hợp ngữ cảnh) từ 3.1 Pro sang 3.7 Flash làm model chính, chỉ dự phòng Pro khi Flash hết quota; riêng \\\"Thiết Kế Prompt Tối Ưu\\\" và \\\"Hợp Nhất Ngữ Cảnh\\\" vẫn giữ 3.1 Pro làm chính như cũ. Vá nhãn hiển thị sai tên model lúc tạo ảnh bìa (trước ghi nhầm \\\"Gemini 2.5 Flash Image\\\", giờ đúng Nano Banana 2 Lite/3.1 Flash Lite Image đang chạy thực tế). Gia cố quy tắc \\\"giữ chú thích gốc của tác giả\\\" ở mục VIII (cấm AI tự bịa chú thích mới nhưng bắt buộc dịch/giữ chú thích thật có sẵn trong bản gốc) để không bị rút gọn mất khi chạy Thiết Kế Prompt Tối Ưu. Chuẩn hoá lại thứ tự dự phòng giữa các bản Flash (3.7 › 3.6 › 3.5 › 3.0) xuyên suốt toàn bộ luồng Phân Tích Sâu, khắc phục nhiều chỗ đang thiếu hẳn 3.6 Flash hoặc sắp sai thứ tự.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
