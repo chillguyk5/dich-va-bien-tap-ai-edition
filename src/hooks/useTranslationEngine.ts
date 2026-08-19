@@ -1,97 +1,304 @@
-import { useState, useRef, useEffect } from 'react';
-import { FileItem, TranslationTier } from '../types';
-import { DEFAULT_DICTIONARY } from '../constants';
-import { useTranslator } from './useTranslator';
-import { useSmartFix } from './useSmartFix';
-import { useTitleNormalizer } from './useTitleNormalizer';
+import { useState, useRef, useEffect, useCallback } from 'react';
+import { FileItem, FileStatus, TranslationTier } from '../types';
+import { pipelineCoordinator } from '../services/pipeline/pipelineCoordinator';
+import { executeTranslatorBatch } from '../services/pipeline/translatorStep';
+import { executeReviewerBatch } from '../services/pipeline/reviewerStep';
+import { executeEditorSingleChapter } from '../services/pipeline/editorStep';
+import { runDeterministicQA, repairTargetedLines } from '../services/pipeline/deterministicQA';
 
 export const useTranslationEngine = (core: any, ui: any) => {
-    const [isProcessing, setIsProcessing] = useState<boolean>(false);
-    const [activeBatches, setActiveBatches] = useState<number>(0);
-    const [processingQueue, setProcessingQueue] = useState<string[]>([]);
-    const [translationTier, setTranslationTier] = useState<TranslationTier>('normal');
-    const [isSmartAutoMode, setIsSmartAutoMode] = useState<boolean>(false);
-    const [autoFixEnabled, setAutoFixEnabled] = useState<boolean>(false);
-    const [retryTrigger, setRetryTrigger] = useState<number>(0);
-    
-    const [startTime, setStartTime] = useState<number | null>(null);
-    const [endTime, setEndTime] = useState<number | null>(null);
-    
-    // Refs
-    const isFixPhaseRef = useRef<boolean>(false);
-    const isProcessingRef = useRef<boolean>(false);
-    const runIdRef = useRef<number>(0);
-    const filesRef = useRef<FileItem[]>(core.files);
-    const scheduledBatchesRef = useRef<Set<string>>(new Set());
-    // BUGFIX (bước C): cờ tường minh báo "đang có 1 phiên Sửa Lỗi (Repair) thực sự chạy dưới nền".
-    // Khác với state isProcessing (có thể bị các effect khác vô tình set sai/sớm), ref này CHỈ do
-    // chính handleFixRemainingRaw bật/tắt, nên executeProcessing() và handleSmartFix() có thể dựa
-    // vào đây để biết chắc có nên khởi động phiên mới (và tăng runIdRef) hay không.
-    const isRepairRunningRef = useRef<boolean>(false);
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
+  const [currentStageText, setCurrentStageText] = useState<string>('');
+  const [translationTier, setTranslationTier] = useState<TranslationTier>('normal');
+  const [startTime, setStartTime] = useState<number | null>(null);
+  const [endTime, setEndTime] = useState<number | null>(null);
 
-    useEffect(() => {
-        filesRef.current = core.files;
-    }, [core.files]);
+  const shouldAbortRef = useRef<boolean>(false);
 
-    useEffect(() => {
-        isProcessingRef.current = isProcessing;
-    }, [isProcessing]);
+  const stopProcessing = useCallback(() => {
+    shouldAbortRef.current = true;
+    pipelineCoordinator.abort();
+    setIsProcessing(false);
+    setEndTime(Date.now());
+    ui.addToast('Đã dừng tiến trình.', 'info');
+  }, [ui]);
 
-    const effectiveDictionary = core.additionalDictionary ? DEFAULT_DICTIONARY + '\n' + core.additionalDictionary : DEFAULT_DICTIONARY;
+  const handleUpdateChapter = useCallback((updated: FileItem) => {
+    core.setFiles((prev: FileItem[]) => 
+      prev.map(f => f.id === updated.id ? { ...f, ...updated } : f)
+    );
+  }, [core]);
 
-    const sharedState = {
-        isProcessing, setIsProcessing,
-        activeBatches, setActiveBatches,
-        processingQueue, setProcessingQueue,
-        translationTier, setTranslationTier,
-        isSmartAutoMode, setIsSmartAutoMode,
-        autoFixEnabled, setAutoFixEnabled,
-        retryTrigger, setRetryTrigger,
-        startTime, setStartTime,
-        endTime, setEndTime,
-        isFixPhaseRef, isProcessingRef, runIdRef, filesRef, scheduledBatchesRef,
-        isRepairRunningRef,
-        effectiveDictionary
+  // Execute Full 4-Stage Pipeline
+  const executeProcessing = useCallback(async (scope: 'all' | 'selected' = 'all') => {
+    const targetFiles = scope === 'selected' && ui.selectedFiles.size > 0
+      ? core.files.filter((f: FileItem) => ui.selectedFiles.has(f.id))
+      : core.files;
+
+    if (!targetFiles.length) {
+      ui.addToast('Không có chương nào để xử lý.', 'warning');
+      return;
+    }
+
+    setIsProcessing(true);
+    shouldAbortRef.current = false;
+    setStartTime(Date.now());
+    setEndTime(null);
+
+    const log = (msg: string) => {
+      if (ui.addLog) ui.addLog(msg);
     };
 
-    const smartFixFns = useSmartFix(core, ui, sharedState);
-    const translatorFns = useTranslator(core, ui, sharedState, smartFixFns);
-    const titleNormalizerFns = useTitleNormalizer(core, ui);
+    try {
+      await pipelineCoordinator.runFullPipeline(targetFiles, {
+        config: core.pipelineConfig,
+        glossary: core.additionalDictionary,
+        pronounProfile: core.pronounProfile,
+        bookStyle: core.bookStyle,
+        characterAddressing: core.characterAddressing,
+        fewShotPool: core.fewShotPool,
+        storyInfo: core.storyInfo,
+        enabledModels: core.enabledModels,
+        openRouterKey: core.openRouterKey,
+        deepseekKey: core.deepseekKey,
+        shouldAbort: () => shouldAbortRef.current,
+        onChapterUpdate: handleUpdateChapter,
+        onLog: log,
+      });
+      ui.addToast('Hoàn thành toàn bộ quy trình 4 tầng!', 'success');
+    } catch (err: any) {
+      log(`❌ Lỗi thực thi pipeline: ${err.message}`);
+      ui.addToast(`Lỗi: ${err.message}`, 'error');
+    } finally {
+      setIsProcessing(false);
+      setEndTime(Date.now());
+    }
+  }, [core, ui, handleUpdateChapter]);
 
-    return {
-        isProcessing,
-        isCustomFixing: smartFixFns.isCustomFixing,
-        customFixProgress: smartFixFns.customFixProgress,
-        activeBatches,
-        processingQueue,
-        translationTier,
-        setTranslationTier,
-        startTime,
-        setStartTime,
-        endTime,
-        setEndTime,
-        isSmartAutoMode,
-        autoFixEnabled,
-        isNormalizingTitles: titleNormalizerFns.isNormalizingTitles,
-        
-        executeProcessing: translatorFns.executeProcessing,
-        stopProcessing: translatorFns.stopProcessing,
-        handleRetranslateConfirm: translatorFns.handleRetranslateConfirm,
-        
-        handleCustomErrorCorrection: smartFixFns.handleCustomErrorCorrection,
-        handleAnalyzeCustomError: smartFixFns.handleAnalyzeCustomError,
-        stopCustomFixing: smartFixFns.stopCustomFixing,
-        handleFixRemainingRaw: smartFixFns.handleFixRemainingRaw,
-        handleSmartFix: smartFixFns.handleSmartFix,
-        handleManualFixSingle: smartFixFns.handleManualFixSingle,
-        
-        handleTitleNormalization: async (scope: 'all' | 'selected' = 'all') => {
-            setStartTime(Date.now());
-            setEndTime(null);
-            const res = await titleNormalizerFns.handleTitleNormalization(scope);
-            setEndTime(Date.now());
-            return res;
-        },
-        stopTitleNormalization: titleNormalizerFns.stopTitleNormalization
-    };
+  // Stage 1: Dịch thô lẻ
+  const executeTranslateOnly = useCallback(async (scope: 'all' | 'selected' = 'all') => {
+    const targetFiles = scope === 'selected' && ui.selectedFiles.size > 0
+      ? core.files.filter((f: FileItem) => ui.selectedFiles.has(f.id))
+      : core.files;
+
+    if (!targetFiles.length) return;
+
+    setIsProcessing(true);
+    shouldAbortRef.current = false;
+    setStartTime(Date.now());
+    setEndTime(null);
+
+    const log = (msg: string) => ui.addLog && ui.addLog(msg);
+
+    try {
+      log(`🚀 Bắt đầu dịch thô ${targetFiles.length} chương...`);
+      for (const file of targetFiles) {
+        if (shouldAbortRef.current) break;
+        file.status = FileStatus.TRANSLATING;
+        handleUpdateChapter(file);
+
+        const res = await executeTranslatorBatch([file], {
+          glossary: core.additionalDictionary,
+          pronounProfile: core.pronounProfile,
+          bookStyle: core.bookStyle,
+          characterAddressing: core.characterAddressing,
+          storyInfo: core.storyInfo,
+        }, {
+          enabledModels: core.enabledModels,
+          openRouterKey: core.openRouterKey,
+          deepseekKey: core.deepseekKey,
+          shouldAbort: () => shouldAbortRef.current,
+          onLog: log,
+        });
+
+        if (res.success) {
+          const draft = res.results.get(file.id);
+          if (draft) {
+            file.draftTranslation = draft;
+            file.translatedContent = draft;
+            file.draftModel = res.usedModel;
+            file.usedModel = res.usedModel;
+            file.status = FileStatus.TRANSLATED;
+          }
+        } else {
+          file.status = FileStatus.ERROR;
+          file.errorMessage = res.error;
+        }
+        handleUpdateChapter(file);
+      }
+      ui.addToast('Đã hoàn thành dịch thô!', 'success');
+    } catch (e: any) {
+      ui.addToast(`Lỗi dịch: ${e.message}`, 'error');
+    } finally {
+      setIsProcessing(false);
+      setEndTime(Date.now());
+    }
+  }, [core, ui, handleUpdateChapter]);
+
+  // Stage 2: Thẩm định Beta lẻ
+  const executeReviewOnly = useCallback(async (scope: 'all' | 'selected' = 'all') => {
+    const targetFiles = scope === 'selected' && ui.selectedFiles.size > 0
+      ? core.files.filter((f: FileItem) => ui.selectedFiles.has(f.id))
+      : core.files.filter((f: FileItem) => f.draftTranslation || f.translatedContent);
+
+    if (!targetFiles.length) return;
+
+    setIsProcessing(true);
+    shouldAbortRef.current = false;
+    setStartTime(Date.now());
+    setEndTime(null);
+
+    const log = (msg: string) => ui.addLog && ui.addLog(msg);
+
+    try {
+      log(`🔍 Thẩm định Beta ${targetFiles.length} chương...`);
+      const res = await executeReviewerBatch(targetFiles, {
+        bookStyle: core.bookStyle,
+        glossary: core.additionalDictionary,
+      }, {
+        enabledModels: core.enabledModels,
+        openRouterKey: core.openRouterKey,
+        deepseekKey: core.deepseekKey,
+        shouldAbort: () => shouldAbortRef.current,
+        onLog: log,
+      });
+
+      if (res.success) {
+        targetFiles.forEach(f => {
+          const report = res.reports.get(f.id);
+          if (report) {
+            f.reviewReport = report;
+            f.reviewModel = res.usedModel;
+            f.status = FileStatus.REVIEWED;
+            handleUpdateChapter(f);
+          }
+        });
+        ui.addToast('Đã hoàn thành thẩm định Beta!', 'success');
+      }
+    } catch (e: any) {
+      ui.addToast(`Lỗi thẩm định: ${e.message}`, 'error');
+    } finally {
+      setIsProcessing(false);
+      setEndTime(Date.now());
+    }
+  }, [core, ui, handleUpdateChapter]);
+
+  // Stage 3: Biên tập Editor lẻ
+  const executeEditOnly = useCallback(async (scope: 'all' | 'selected' = 'all') => {
+    const targetFiles = scope === 'selected' && ui.selectedFiles.size > 0
+      ? core.files.filter((f: FileItem) => ui.selectedFiles.has(f.id))
+      : core.files.filter((f: FileItem) => f.draftTranslation || f.translatedContent);
+
+    if (!targetFiles.length) return;
+
+    setIsProcessing(true);
+    shouldAbortRef.current = false;
+    setStartTime(Date.now());
+    setEndTime(null);
+
+    const log = (msg: string) => ui.addLog && ui.addLog(msg);
+
+    try {
+      log(`✍️ Biên tập ${targetFiles.length} chương...`);
+      for (const file of targetFiles) {
+        if (shouldAbortRef.current) break;
+        file.status = FileStatus.EDITING;
+        handleUpdateChapter(file);
+
+        const res = await executeEditorSingleChapter(file, {
+          bookStyle: core.bookStyle,
+          rawMode: core.pipelineConfig?.editorRawMode || 'hybrid',
+          fewShotPool: core.fewShotPool,
+          contextLines: core.pipelineConfig?.hybridContextLines || 2,
+        }, {
+          enabledModels: core.enabledModels,
+          openRouterKey: core.openRouterKey,
+          deepseekKey: core.deepseekKey,
+          shouldAbort: () => shouldAbortRef.current,
+          onLog: log,
+        });
+
+        if (res.success) {
+          file.editedTranslation = res.editedContent;
+          file.translatedContent = res.editedContent;
+          file.editedModel = res.usedModel;
+          file.status = FileStatus.EDITED;
+        } else {
+          file.status = FileStatus.ERROR;
+          file.errorMessage = res.error;
+        }
+        handleUpdateChapter(file);
+      }
+      ui.addToast('Đã hoàn thành biên tập!', 'success');
+    } catch (e: any) {
+      ui.addToast(`Lỗi biên tập: ${e.message}`, 'error');
+    } finally {
+      setIsProcessing(false);
+      setEndTime(Date.now());
+    }
+  }, [core, ui, handleUpdateChapter]);
+
+  // Stage 4: Hậu kiểm QA lẻ
+  const executeQAOnly = useCallback(async (scope: 'all' | 'selected' = 'all') => {
+    const targetFiles = scope === 'selected' && ui.selectedFiles.size > 0
+      ? core.files.filter((f: FileItem) => ui.selectedFiles.has(f.id))
+      : core.files.filter((f: FileItem) => f.translatedContent || f.editedTranslation || f.draftTranslation);
+
+    if (!targetFiles.length) return;
+
+    setIsProcessing(true);
+    shouldAbortRef.current = false;
+    setStartTime(Date.now());
+    setEndTime(null);
+
+    const log = (msg: string) => ui.addLog && ui.addLog(msg);
+
+    try {
+      log(`🛡️ Chạy hậu kiểm QA cho ${targetFiles.length} chương...`);
+      for (const file of targetFiles) {
+        if (shouldAbortRef.current) break;
+        file.status = FileStatus.QA_CHECKING;
+        handleUpdateChapter(file);
+
+        const currentText = file.editedTranslation || file.draftTranslation || file.translatedContent || '';
+        const qa = runDeterministicQA(file.content, currentText, core.additionalDictionary);
+        let finalContent = qa.cleanedText;
+
+        if (qa.residueChineseCount > 0) {
+          file.status = FileStatus.QA_REPAIRING;
+          handleUpdateChapter(file);
+          finalContent = await repairTargetedLines(finalContent, core.additionalDictionary);
+        }
+
+        file.finalTranslation = finalContent;
+        file.translatedContent = finalContent;
+        file.status = FileStatus.COMPLETED;
+        file.qaIssues = qa.issues;
+        handleUpdateChapter(file);
+      }
+      ui.addToast('Đã hoàn thành hậu kiểm QA!', 'success');
+    } catch (e: any) {
+      ui.addToast(`Lỗi QA: ${e.message}`, 'error');
+    } finally {
+      setIsProcessing(false);
+      setEndTime(Date.now());
+    }
+  }, [core, ui, handleUpdateChapter]);
+
+  return {
+    isProcessing,
+    currentStageText,
+    translationTier,
+    setTranslationTier,
+    startTime,
+    setStartTime,
+    endTime,
+    setEndTime,
+    executeProcessing,
+    stopProcessing,
+    executeTranslateOnly,
+    executeReviewOnly,
+    executeEditOnly,
+    executeQAOnly,
+  };
 };

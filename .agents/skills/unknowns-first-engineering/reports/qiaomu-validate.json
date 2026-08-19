@@ -1,0 +1,12 @@
+{
+  "ok": true,
+  "root": "C:\\Users\\admin\\.claude\\skills\\unknowns-first-engineering-workspace\\improved",
+  "failures": [],
+  "warnings": [
+    "README may be missing install command",
+    "README may be missing natural examples",
+    "README may be missing verification commands",
+    "adapter target not declared: openai",
+    "adapter target not declared: agent-skills-compatible"
+  ]
+}

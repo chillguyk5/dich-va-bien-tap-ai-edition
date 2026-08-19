@@ -9,7 +9,5 @@ export * from './ImportModal';
 export * from './PasteModal';
 export * from './ChangelogModal';
 export * from './ToastContainer';
-export * from './SmartStartModal';
-export * from './NameAnalysisModal';
 export * from './RawDownloadModal';
 export * from './ApiSettingsModal';

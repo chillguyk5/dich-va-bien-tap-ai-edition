@@ -1,0 +1,644 @@
+{
+  "ok": false,
+  "complete": false,
+  "researched_at": "2026-08-05",
+  "queries": [
+    "engineering skill adaptive risk scaling repository evidence verification",
+    "coding agent skill root cause debugging bounded iteration",
+    "agent skill evidence-based verification risk proportionate implementation"
+  ],
+  "metric_semantics": {
+    "skills_sh_installs": "ecosystem install telemetry; not ratings or correctness",
+    "skillsmp_repo_stars": "GitHub repository stars; not installs, ratings, or skill-specific quality",
+    "cross_catalog_score": "not calculated; metrics remain separate"
+  },
+  "query_runs": [
+    {
+      "query": "engineering skill adaptive risk scaling repository evidence verification",
+      "skills_sh": "not_run",
+      "skillsmp": "ok",
+      "skillsmp_candidates": 5
+    },
+    {
+      "query": "coding agent skill root cause debugging bounded iteration",
+      "skills_sh": "not_run",
+      "skillsmp": "ok",
+      "skillsmp_candidates": 8
+    },
+    {
+      "query": "agent skill evidence-based verification risk proportionate implementation",
+      "skills_sh": "not_run",
+      "skillsmp": "ok",
+      "skillsmp_candidates": 10
+    }
+  ],
+  "candidate_family_count": 21,
+  "candidates": [
+    {
+      "family_key": "openclaw/openclaw:acp-router",
+      "queries": [
+        "agent skill evidence-based verification risk proportionate implementation",
+        "coding agent skill root cause debugging bounded iteration"
+      ],
+      "skills_sh": null,
+      "skillsmp": {
+        "source": "skillsmp",
+        "name": "acp-router",
+        "author": "openclaw",
+        "description": "Route plain-language requests for Claude Code, Cursor, Copilot, OpenClaw ACP, OpenCode, Gemini CLI, Qwen, Kiro, Kimi, iFlow, Factory Droid, Kilocode, or explicit ACP harness work into either OpenClaw ACP runtime sessions or direct acpx-driven sessions (\"telephone game\" flow). For coding-agent thread requests, read this skill first, then use only `sessions_spawn` for thread creation. Codex chat binding defaults to the native Codex app-server plugin unless ACP is explicit or background spawn needs ACP.",
+        "content_language": "en",
+        "github_url": "https://github.com/openclaw/openclaw/tree/main/extensions/acpx/skills/acp-router",
+        "skillsmp_url": "https://skillsmp.com/creators/openclaw/openclaw/extensions-acpx-skills-acp-router",
+        "repo_stars": 384196,
+        "catalog_updated_at": "2026-07-16T15:51:30+00:00",
+        "source_key": "openclaw/openclaw:extensions/acpx/skills/acp-router",
+        "family_key": "openclaw/openclaw:acp-router",
+        "aliases": [],
+        "query": "coding agent skill root cause debugging bounded iteration"
+      },
+      "catalogs": [
+        "skillsmp"
+      ],
+      "requires_source_review": true
+    },
+    {
+      "family_key": "openclaw/openclaw:agent-transcript",
+      "queries": [
+        "agent skill evidence-based verification risk proportionate implementation"
+      ],
+      "skills_sh": null,
+      "skillsmp": {
+        "source": "skillsmp",
+        "name": "agent-transcript",
+        "author": "openclaw",
+        "description": "Add a redacted agent transcript section to GitHub PR or issue bodies during OpenClaw agent-created PR/issue workflows.",
+        "content_language": "en",
+        "github_url": "https://github.com/openclaw/openclaw/tree/main/.agents/skills/agent-transcript",
+        "skillsmp_url": "https://skillsmp.com/creators/openclaw/openclaw/agents-skills-agent-transcript",
+        "repo_stars": 384196,
+        "catalog_updated_at": "2026-05-26T15:17:53+00:00",
+        "source_key": "openclaw/openclaw:.agents/skills/agent-transcript",
+        "family_key": "openclaw/openclaw:agent-transcript",
+        "aliases": [],
+        "query": "agent skill evidence-based verification risk proportionate implementation"
+      },
+      "catalogs": [
+        "skillsmp"
+      ],
+      "requires_source_review": true
+    },
+    {
+      "family_key": "openclaw/openclaw:coding-agent",
+      "queries": [
+        "agent skill evidence-based verification risk proportionate implementation",
+        "coding agent skill root cause debugging bounded iteration"
+      ],
+      "skills_sh": null,
+      "skillsmp": {
+        "source": "skillsmp",
+        "name": "coding-agent",
+        "author": "openclaw",
+        "description": "Delegate coding work to Codex, Claude Code, or OpenCode as background workers; not simple edits or read-only code lookup.",
+        "content_language": "en",
+        "github_url": "https://github.com/openclaw/openclaw/tree/main/skills/coding-agent",
+        "skillsmp_url": "https://skillsmp.com/creators/openclaw/openclaw/skills-coding-agent",
+        "repo_stars": 384196,
+        "catalog_updated_at": "2026-07-13T06:51:49+00:00",
+        "source_key": "openclaw/openclaw:skills/coding-agent",
+        "family_key": "openclaw/openclaw:coding-agent",
+        "aliases": [],
+        "query": "coding agent skill root cause debugging bounded iteration"
+      },
+      "catalogs": [
+        "skillsmp"
+      ],
+      "requires_source_review": true
+    },
+    {
+      "family_key": "openclaw/openclaw:control-ui-e2e",
+      "queries": [
+        "agent skill evidence-based verification risk proportionate implementation"
+      ],
+      "skills_sh": null,
+      "skillsmp": {
+        "source": "skillsmp",
+        "name": "control-ui-e2e",
+        "author": "openclaw",
+        "description": "Use when testing, fixing, or extending the OpenClaw Control UI GUI with Vitest + Playwright end-to-end checks, mocked Gateway WebSocket flows, mocked dashboard runs, screenshots/videos, or agent-verifiable browser proof.",
+        "content_language": "en",
+        "github_url": "https://github.com/openclaw/openclaw/tree/main/.agents/skills/control-ui-e2e",
+        "skillsmp_url": "https://skillsmp.com/creators/openclaw/openclaw/agents-skills-control-ui-e2e",
+        "repo_stars": 384196,
+        "catalog_updated_at": "2026-05-23T07:56:17+00:00",
+        "source_key": "openclaw/openclaw:.agents/skills/control-ui-e2e",
+        "family_key": "openclaw/openclaw:control-ui-e2e",
+        "aliases": [],
+        "query": "agent skill evidence-based verification risk proportionate implementation"
+      },
+      "catalogs": [
+        "skillsmp"
+      ],
+      "requires_source_review": true
+    },
+    {
+      "family_key": "openclaw/openclaw:discord-clawd",
+      "queries": [
+        "agent skill evidence-based verification risk proportionate implementation"
+      ],
+      "skills_sh": null,
+      "skillsmp": {
+        "source": "skillsmp",
+        "name": "discord-clawd",
+        "author": "openclaw",
+        "description": "Use to talk to the Discord-backed OpenClaw agent/session; not for archive search.",
+        "content_language": "en",
+        "github_url": "https://github.com/openclaw/openclaw/tree/main/.agents/skills/discord-clawd",
+        "skillsmp_url": "https://skillsmp.com/creators/openclaw/openclaw/agents-skills-discord-clawd",
+        "repo_stars": 384196,
+        "catalog_updated_at": "2026-04-27T06:50:15+00:00",
+        "source_key": "openclaw/openclaw:.agents/skills/discord-clawd",
+        "family_key": "openclaw/openclaw:discord-clawd",
+        "aliases": [],
+        "query": "agent skill evidence-based verification risk proportionate implementation"
+      },
+      "catalogs": [
+        "skillsmp"
+      ],
+      "requires_source_review": true
+    },
+    {
+      "family_key": "openclaw/openclaw:discord-user-post",
+      "queries": [
+        "agent skill evidence-based verification risk proportionate implementation"
+      ],
+      "skills_sh": null,
+      "skillsmp": {
+        "source": "skillsmp",
+        "name": "discord-user-post",
+        "author": "openclaw",
+        "description": "Post an approved message as the logged-in Discord user through the Discord desktop app. Use for release announcements or other direct user-authored Discord posts; not for OpenClaw channel sends, bots, webhooks, relays, agent sessions, or archive search.",
+        "content_language": "en",
+        "github_url": "https://github.com/openclaw/openclaw/tree/main/.agents/skills/discord-user-post",
+        "skillsmp_url": "https://skillsmp.com/creators/openclaw/openclaw/agents-skills-discord-user-post",
+        "repo_stars": 384196,
+        "catalog_updated_at": "2026-06-15T09:26:30+00:00",
+        "source_key": "openclaw/openclaw:.agents/skills/discord-user-post",
+        "family_key": "openclaw/openclaw:discord-user-post",
+        "aliases": [],
+        "query": "agent skill evidence-based verification risk proportionate implementation"
+      },
+      "catalogs": [
+        "skillsmp"
+      ],
+      "requires_source_review": true
+    },
+    {
+      "family_key": "openclaw/openclaw:prose",
+      "queries": [
+        "agent skill evidence-based verification risk proportionate implementation"
+      ],
+      "skills_sh": null,
+      "skillsmp": {
+        "source": "skillsmp",
+        "name": "prose",
+        "author": "openclaw",
+        "description": "OpenProse VM skill pack. Activate on any `prose` command, .prose files, or OpenProse mentions; orchestrates multi-agent workflows.",
+        "content_language": "en",
+        "github_url": "https://github.com/openclaw/openclaw/tree/main/extensions/open-prose/skills/prose",
+        "skillsmp_url": "https://skillsmp.com/creators/openclaw/openclaw/extensions-open-prose-skills-prose",
+        "repo_stars": 384196,
+        "catalog_updated_at": "2026-07-11T08:09:51+00:00",
+        "source_key": "openclaw/openclaw:extensions/open-prose/skills/prose",
+        "family_key": "openclaw/openclaw:prose",
+        "aliases": [],
+        "query": "agent skill evidence-based verification risk proportionate implementation"
+      },
+      "catalogs": [
+        "skillsmp"
+      ],
+      "requires_source_review": true
+    },
+    {
+      "family_key": "openclaw/openclaw:skill-creator",
+      "queries": [
+        "agent skill evidence-based verification risk proportionate implementation"
+      ],
+      "skills_sh": null,
+      "skillsmp": {
+        "source": "skillsmp",
+        "name": "skill-creator",
+        "author": "openclaw",
+        "description": "Create, edit, audit, tidy, validate, or restructure AgentSkills and SKILL.md files.",
+        "content_language": "en",
+        "github_url": "https://github.com/openclaw/openclaw/tree/main/skills/skill-creator",
+        "skillsmp_url": "https://skillsmp.com/creators/openclaw/openclaw/skills-skill-creator",
+        "repo_stars": 384196,
+        "catalog_updated_at": "2026-07-01T03:24:22+00:00",
+        "source_key": "openclaw/openclaw:skills/skill-creator",
+        "family_key": "openclaw/openclaw:skill-creator",
+        "aliases": [],
+        "query": "agent skill evidence-based verification risk proportionate implementation"
+      },
+      "catalogs": [
+        "skillsmp"
+      ],
+      "requires_source_review": true
+    },
+    {
+      "family_key": "openclaw/openclaw:technical-documentation",
+      "queries": [
+        "agent skill evidence-based verification risk proportionate implementation"
+      ],
+      "skills_sh": null,
+      "skillsmp": {
+        "source": "skillsmp",
+        "name": "technical-documentation",
+        "author": "openclaw",
+        "description": "Build and review high-quality technical docs as well as agent instruction files in your repository.",
+        "content_language": "en",
+        "github_url": "https://github.com/openclaw/openclaw/tree/main/.agents/skills/technical-documentation",
+        "skillsmp_url": "https://skillsmp.com/creators/openclaw/openclaw/agents-skills-technical-documentation",
+        "repo_stars": 384196,
+        "catalog_updated_at": "2026-05-25T06:20:14+00:00",
+        "source_key": "openclaw/openclaw:.agents/skills/technical-documentation",
+        "family_key": "openclaw/openclaw:technical-documentation",
+        "aliases": [],
+        "query": "agent skill evidence-based verification risk proportionate implementation"
+      },
+      "catalogs": [
+        "skillsmp"
+      ],
+      "requires_source_review": true
+    },
+    {
+      "family_key": "openclaw/openclaw:telegram-crabbox-e2e-proof",
+      "queries": [
+        "agent skill evidence-based verification risk proportionate implementation"
+      ],
+      "skills_sh": null,
+      "skillsmp": {
+        "source": "skillsmp",
+        "name": "telegram-crabbox-e2e-proof",
+        "author": "openclaw",
+        "description": "Use when reviewing, reproducing, or proving OpenClaw Telegram behavior with a real Telegram user on Crabbox, including PR review workflows that need an agent-controlled Telegram Desktop recording, TDLib user-driver commands, Convex-leased credentials, WebVNC observation, and motion-trimmed artifacts.",
+        "content_language": "en",
+        "github_url": "https://github.com/openclaw/openclaw/tree/main/.agents/skills/telegram-crabbox-e2e-proof",
+        "skillsmp_url": "https://skillsmp.com/creators/openclaw/openclaw/agents-skills-telegram-crabbox-e2e-proof",
+        "repo_stars": 384196,
+        "catalog_updated_at": "2026-05-18T13:00:36+00:00",
+        "source_key": "openclaw/openclaw:.agents/skills/telegram-crabbox-e2e-proof",
+        "family_key": "openclaw/openclaw:telegram-crabbox-e2e-proof",
+        "aliases": [],
+        "query": "agent skill evidence-based verification risk proportionate implementation"
+      },
+      "catalogs": [
+        "skillsmp"
+      ],
+      "requires_source_review": true
+    },
+    {
+      "family_key": "affaan-m/ecc:agent-eval",
+      "queries": [
+        "coding agent skill root cause debugging bounded iteration"
+      ],
+      "skills_sh": null,
+      "skillsmp": {
+        "source": "skillsmp",
+        "name": "agent-eval",
+        "author": "affaan-m",
+        "description": "Head-to-head comparison of coding agents (Claude Code, Aider, Codex, etc.) on custom tasks with pass rate, cost, time, and consistency metrics",
+        "content_language": "en",
+        "github_url": "https://github.com/affaan-m/ECC/tree/main/skills/agent-eval",
+        "skillsmp_url": "https://skillsmp.com/creators/affaan-m/ecc/skills-agent-eval",
+        "repo_stars": 233627,
+        "catalog_updated_at": "2026-07-17T21:13:49+00:00",
+        "source_key": "affaan-m/ecc:skills/agent-eval",
+        "family_key": "affaan-m/ecc:agent-eval",
+        "aliases": [],
+        "query": "coding agent skill root cause debugging bounded iteration"
+      },
+      "catalogs": [
+        "skillsmp"
+      ],
+      "requires_source_review": true
+    },
+    {
+      "family_key": "affaan-m/ecc:agentic-engineering",
+      "queries": [
+        "engineering skill adaptive risk scaling repository evidence verification"
+      ],
+      "skills_sh": null,
+      "skillsmp": {
+        "source": "skillsmp",
+        "name": "agentic-engineering",
+        "author": "affaan-m",
+        "description": "Operate as an agentic engineer using eval-first execution, decomposition, and cost-aware model routing.",
+        "content_language": "en",
+        "github_url": "https://github.com/affaan-m/ECC/tree/main/skills/agentic-engineering",
+        "skillsmp_url": "https://skillsmp.com/creators/affaan-m/ecc/skills-agentic-engineering",
+        "repo_stars": 233627,
+        "catalog_updated_at": "2026-06-11T12:12:21+00:00",
+        "source_key": "affaan-m/ecc:skills/agentic-engineering",
+        "family_key": "affaan-m/ecc:agentic-engineering",
+        "aliases": [
+          {
+            "language": "zh",
+            "github_url": "https://github.com/affaan-m/ECC/tree/main/docs/zh-CN/skills/agentic-engineering"
+          },
+          {
+            "language": "zh",
+            "github_url": "https://github.com/affaan-m/ECC/tree/main/docs/zh-CN/skills/agentic-engineering"
+          },
+          {
+            "language": "ja",
+            "github_url": "https://github.com/affaan-m/ECC/tree/main/docs/ja-JP/skills/agentic-engineering"
+          },
+          {
+            "language": "en",
+            "github_url": "https://github.com/affaan-m/ECC/tree/main/.kiro/skills/agentic-engineering"
+          }
+        ],
+        "query": "engineering skill adaptive risk scaling repository evidence verification"
+      },
+      "catalogs": [
+        "skillsmp"
+      ],
+      "requires_source_review": true
+    },
+    {
+      "family_key": "affaan-m/ecc:ai-first-engineering",
+      "queries": [
+        "engineering skill adaptive risk scaling repository evidence verification"
+      ],
+      "skills_sh": null,
+      "skillsmp": {
+        "source": "skillsmp",
+        "name": "ai-first-engineering",
+        "author": "affaan-m",
+        "description": "Engineering operating model for teams where AI agents generate a large share of implementation output.",
+        "content_language": "en",
+        "github_url": "https://github.com/affaan-m/ECC/tree/main/skills/ai-first-engineering",
+        "skillsmp_url": "https://skillsmp.com/creators/affaan-m/ecc/skills-ai-first-engineering",
+        "repo_stars": 233627,
+        "catalog_updated_at": "2026-06-11T12:12:21+00:00",
+        "source_key": "affaan-m/ecc:skills/ai-first-engineering",
+        "family_key": "affaan-m/ecc:ai-first-engineering",
+        "aliases": [
+          {
+            "language": "ja",
+            "github_url": "https://github.com/affaan-m/ECC/tree/main/docs/ja-JP/skills/ai-first-engineering"
+          },
+          {
+            "language": "zh",
+            "github_url": "https://github.com/affaan-m/ECC/tree/main/docs/zh-CN/skills/ai-first-engineering"
+          },
+          {
+            "language": "ja",
+            "github_url": "https://github.com/affaan-m/ECC/tree/main/docs/ja-JP/skills/ai-first-engineering"
+          },
+          {
+            "language": "zh",
+            "github_url": "https://github.com/affaan-m/ECC/tree/main/docs/zh-CN/skills/ai-first-engineering"
+          }
+        ],
+        "query": "engineering skill adaptive risk scaling repository evidence verification"
+      },
+      "catalogs": [
+        "skillsmp"
+      ],
+      "requires_source_review": true
+    },
+    {
+      "family_key": "affaan-m/ecc:claude-devfleet",
+      "queries": [
+        "coding agent skill root cause debugging bounded iteration"
+      ],
+      "skills_sh": null,
+      "skillsmp": {
+        "source": "skillsmp",
+        "name": "claude-devfleet",
+        "author": "affaan-m",
+        "description": "Orchestrate multi-agent coding tasks via Claude DevFleet — plan projects, dispatch parallel agents in isolated worktrees, monitor progress, and read structured reports.",
+        "content_language": "en",
+        "github_url": "https://github.com/affaan-m/ECC/tree/main/skills/claude-devfleet",
+        "skillsmp_url": "https://skillsmp.com/creators/affaan-m/ecc/skills-claude-devfleet",
+        "repo_stars": 233627,
+        "catalog_updated_at": "2026-06-11T12:12:21+00:00",
+        "source_key": "affaan-m/ecc:skills/claude-devfleet",
+        "family_key": "affaan-m/ecc:claude-devfleet",
+        "aliases": [],
+        "query": "coding agent skill root cause debugging bounded iteration"
+      },
+      "catalogs": [
+        "skillsmp"
+      ],
+      "requires_source_review": true
+    },
+    {
+      "family_key": "affaan-m/ecc:coding-standards",
+      "queries": [
+        "coding agent skill root cause debugging bounded iteration"
+      ],
+      "skills_sh": null,
+      "skillsmp": {
+        "source": "skillsmp",
+        "name": "coding-standards",
+        "author": "affaan-m",
+        "description": "Baseline cross-project coding conventions for naming, readability, immutability, and code-quality review. Use detailed frontend or backend skills for framework-specific patterns.",
+        "content_language": "en",
+        "github_url": "https://github.com/affaan-m/ECC/tree/main/.agents/skills/coding-standards",
+        "skillsmp_url": "https://skillsmp.com/creators/affaan-m/ecc/agents-skills-coding-standards",
+        "repo_stars": 233627,
+        "catalog_updated_at": "2026-06-07T05:26:01+00:00",
+        "source_key": "affaan-m/ecc:.agents/skills/coding-standards",
+        "family_key": "affaan-m/ecc:coding-standards",
+        "aliases": [
+          {
+            "language": "es",
+            "github_url": "https://github.com/affaan-m/ECC/tree/main/docs/es/skills/coding-standards"
+          },
+          {
+            "language": "ja",
+            "github_url": "https://github.com/affaan-m/ECC/tree/main/docs/ja-JP/skills/coding-standards"
+          },
+          {
+            "language": "es",
+            "github_url": "https://github.com/affaan-m/ECC/tree/main/docs/es/skills/coding-standards"
+          },
+          {
+            "language": "ja",
+            "github_url": "https://github.com/affaan-m/ECC/tree/main/docs/ja-JP/skills/coding-standards"
+          }
+        ],
+        "query": "coding agent skill root cause debugging bounded iteration"
+      },
+      "catalogs": [
+        "skillsmp"
+      ],
+      "requires_source_review": true
+    },
+    {
+      "family_key": "affaan-m/ecc:flox-environments",
+      "queries": [
+        "coding agent skill root cause debugging bounded iteration"
+      ],
+      "skills_sh": null,
+      "skillsmp": {
+        "source": "skillsmp",
+        "name": "flox-environments",
+        "author": "affaan-m",
+        "description": "Create reproducible, cross-platform (macOS/Linux) development environments with Flox, a declarative Nix-based environment manager. Use when setting up project toolchains for any language, installing system-level dependencies (compilers, databases, native libs like openssl/BLAS), pinning exact package versions for a team, running local services (PostgreSQL, Redis, Kafka), onboarding developers with one command, or solving 'works on my machine' problems — including agent/vibe-coding setups that need project-scoped tools without sudo. Also use when the user mentions .flox/, manifest.toml, flox activate, or FloxHub.",
+        "content_language": "en",
+        "github_url": "https://github.com/affaan-m/ECC/tree/main/skills/flox-environments",
+        "skillsmp_url": "https://skillsmp.com/creators/affaan-m/ecc/skills-flox-environments",
+        "repo_stars": 233627,
+        "catalog_updated_at": "2026-06-16T06:15:43+00:00",
+        "source_key": "affaan-m/ecc:skills/flox-environments",
+        "family_key": "affaan-m/ecc:flox-environments",
+        "aliases": [],
+        "query": "coding agent skill root cause debugging bounded iteration"
+      },
+      "catalogs": [
+        "skillsmp"
+      ],
+      "requires_source_review": true
+    },
+    {
+      "family_key": "affaan-m/ecc:inherit-legacy-style",
+      "queries": [
+        "coding agent skill root cause debugging bounded iteration"
+      ],
+      "skills_sh": null,
+      "skillsmp": {
+        "source": "skillsmp",
+        "name": "inherit-legacy-style",
+        "author": "affaan-m",
+        "description": "Legacy-project style inheritance skill. Use when the user types /inherit-legacy-style, or when onboarding an AI coding agent onto a hand-written legacy project and you need to prevent \"style drift\" (the model imposing its pretrained mainstream idioms onto the project). Language- and framework-agnostic — it aligns meta-architecture only, not syntax. Once run, it becomes a behavioral constraint on all subsequent coding tasks. Do NOT use for pure research or one-off questions unrelated to code-style alignment.",
+        "content_language": "en",
+        "github_url": "https://github.com/affaan-m/ECC/tree/main/skills/inherit-legacy-style",
+        "skillsmp_url": "https://skillsmp.com/creators/affaan-m/ecc/skills-inherit-legacy-style",
+        "repo_stars": 233627,
+        "catalog_updated_at": "2026-06-11T12:12:21+00:00",
+        "source_key": "affaan-m/ecc:skills/inherit-legacy-style",
+        "family_key": "affaan-m/ecc:inherit-legacy-style",
+        "aliases": [],
+        "query": "coding agent skill root cause debugging bounded iteration"
+      },
+      "catalogs": [
+        "skillsmp"
+      ],
+      "requires_source_review": true
+    },
+    {
+      "family_key": "affaan-m/ecc:intent-driven-development",
+      "queries": [
+        "engineering skill adaptive risk scaling repository evidence verification"
+      ],
+      "skills_sh": null,
+      "skillsmp": {
+        "source": "skillsmp",
+        "name": "intent-driven-development",
+        "author": "affaan-m",
+        "description": "Turn ambiguous or high-impact product and engineering changes into scoped, verifiable acceptance criteria before or alongside implementation. Use when a user asks to clarify a feature, define acceptance criteria, de-risk a security/data/migration/integration change, prepare implementation requirements for another agent, or make a complex request testable. Do not trigger for trivial edits, straightforward fixes, active debugging, code review, or implementation requests whose acceptance conditions are already clear unless the user explicitly invokes this skill.",
+        "content_language": "en",
+        "github_url": "https://github.com/affaan-m/ECC/tree/main/skills/intent-driven-development",
+        "skillsmp_url": "https://skillsmp.com/creators/affaan-m/ecc/skills-intent-driven-development",
+        "repo_stars": 233627,
+        "catalog_updated_at": "2026-06-07T05:26:45+00:00",
+        "source_key": "affaan-m/ecc:skills/intent-driven-development",
+        "family_key": "affaan-m/ecc:intent-driven-development",
+        "aliases": [],
+        "query": "engineering skill adaptive risk scaling repository evidence verification"
+      },
+      "catalogs": [
+        "skillsmp"
+      ],
+      "requires_source_review": true
+    },
+    {
+      "family_key": "affaan-m/ecc:mle-workflow",
+      "queries": [
+        "engineering skill adaptive risk scaling repository evidence verification"
+      ],
+      "skills_sh": null,
+      "skillsmp": {
+        "source": "skillsmp",
+        "name": "mle-workflow",
+        "author": "affaan-m",
+        "description": "Production machine-learning engineering workflow for data contracts, reproducible training, model evaluation, deployment, monitoring, and rollback. Use when building, reviewing, or hardening ML systems beyond one-off notebooks.",
+        "content_language": "en",
+        "github_url": "https://github.com/affaan-m/ECC/tree/main/.agents/skills/mle-workflow",
+        "skillsmp_url": "https://skillsmp.com/creators/affaan-m/ecc/agents-skills-mle-workflow",
+        "repo_stars": 233627,
+        "catalog_updated_at": "2026-05-11T22:11:05+00:00",
+        "source_key": "affaan-m/ecc:.agents/skills/mle-workflow",
+        "family_key": "affaan-m/ecc:mle-workflow",
+        "aliases": [],
+        "query": "engineering skill adaptive risk scaling repository evidence verification"
+      },
+      "catalogs": [
+        "skillsmp"
+      ],
+      "requires_source_review": true
+    },
+    {
+      "family_key": "affaan-m/ecc:react-performance",
+      "queries": [
+        "engineering skill adaptive risk scaling repository evidence verification"
+      ],
+      "skills_sh": null,
+      "skillsmp": {
+        "source": "skillsmp",
+        "name": "react-performance",
+        "author": "affaan-m",
+        "description": "React and Next.js performance optimization patterns adapted from Vercel Engineering's React Best Practices (https://github.com/vercel-labs/agent-skills). Organizes 70+ rules across 8 priority categories — waterfalls, bundle size, server-side, client fetching, re-render, rendering, JS micro-perf, advanced. Use when writing, reviewing, or refactoring React/Next.js code for performance.",
+        "content_language": "en",
+        "github_url": "https://github.com/affaan-m/ECC/tree/main/skills/react-performance",
+        "skillsmp_url": "https://skillsmp.com/creators/affaan-m/ecc/skills-react-performance",
+        "repo_stars": 233627,
+        "catalog_updated_at": "2026-06-11T12:12:21+00:00",
+        "source_key": "affaan-m/ecc:skills/react-performance",
+        "family_key": "affaan-m/ecc:react-performance",
+        "aliases": [],
+        "query": "engineering skill adaptive risk scaling repository evidence verification"
+      },
+      "catalogs": [
+        "skillsmp"
+      ],
+      "requires_source_review": true
+    },
+    {
+      "family_key": "affaan-m/ecc:search-first",
+      "queries": [
+        "coding agent skill root cause debugging bounded iteration"
+      ],
+      "skills_sh": null,
+      "skillsmp": {
+        "source": "skillsmp",
+        "name": "search-first",
+        "author": "affaan-m",
+        "description": "Research-before-coding workflow. Search for existing tools, libraries, and patterns before writing custom code. Invokes the researcher agent.",
+        "content_language": "en",
+        "github_url": "https://github.com/affaan-m/ECC/tree/main/skills/search-first",
+        "skillsmp_url": "https://skillsmp.com/creators/affaan-m/ecc/skills-search-first",
+        "repo_stars": 233627,
+        "catalog_updated_at": "2026-06-11T12:12:21+00:00",
+        "source_key": "affaan-m/ecc:skills/search-first",
+        "family_key": "affaan-m/ecc:search-first",
+        "aliases": [],
+        "query": "coding agent skill root cause debugging bounded iteration"
+      },
+      "catalogs": [
+        "skillsmp"
+      ],
+      "requires_source_review": true
+    }
+  ],
+  "missing_evidence": [],
+  "next_steps": [
+    "shortlist by job relevance and role coverage, not combined popularity",
+    "open canonical GitHub source and inspect SKILL.md before adoption",
+    "verify license, maintenance, permissions, security, duplication, and rating evidence",
+    "write keep/adapt/reject/invent synthesis before authoring"
+  ]
+}

@@ -26,21 +26,34 @@ const FileCard: React.FC<FileCardProps> = ({
     handleSelectFile, handleManualFixSingle, requestRetranslateSingle, handleAutoSplitChapters, openEditor, handleRemoveFile, handleRescueCopy 
 }) => {
     const formatNumber = (num: number) => new Intl.NumberFormat('vi-VN').format(num);
-    const isRepairing = file.status === FileStatus.REPAIRING;
-    const isProcessing = file.status === FileStatus.PROCESSING;
+    const isRepairing = file.status === FileStatus.REPAIRING || file.status === FileStatus.QA_REPAIRING;
+    const isProcessing = file.status === FileStatus.PROCESSING || file.status === FileStatus.TRANSLATING || 
+        file.status === FileStatus.REVIEWING || file.status === FileStatus.EDITING || file.status === FileStatus.QA_CHECKING;
     
     // Strict Integrity Check using centralized logic
     const integrity = validateTranslationIntegrity(file.content, file.translatedContent || "", ratioLimits, storyInfo.languages, file.usedModel);
     const isRatioSuspicious = !integrity.isValid && integrity.reason?.toLowerCase().includes('tỷ lệ');
-    const isRatioLow = file.status === FileStatus.ERROR && integrity.ratio < 0.2; // Extra check for critical failure
+    const isRatioLow = file.status === FileStatus.ERROR && integrity.ratio < 0.2;
     
     const ratioPercent = Math.round(integrity.ratio * 100);
-
-    // Has Content to Show?
     const hasContent = file.translatedContent && file.translatedContent.length > 0;
 
-    // Helper for button visibility (Processing states usually lock actions)
-    const isLocked = isProcessing || isRepairing;
+    const getStatusLabel = () => {
+        switch (file.status) {
+            case FileStatus.IDLE: return 'Chờ dịch';
+            case FileStatus.TRANSLATING: return 'Đang dịch...';
+            case FileStatus.TRANSLATED: return 'Đã dịch thô';
+            case FileStatus.REVIEWING: return 'Đang thẩm định...';
+            case FileStatus.REVIEWED: return 'Đã thẩm định';
+            case FileStatus.EDITING: return 'Đang biên tập...';
+            case FileStatus.EDITED: return 'Đã biên tập';
+            case FileStatus.QA_CHECKING: return 'Đang hậu kiểm...';
+            case FileStatus.QA_REPAIRING: return 'Đang sửa Hán tự...';
+            case FileStatus.COMPLETED: return 'Hoàn tất';
+            case FileStatus.ERROR: return 'Lỗi';
+            default: return file.status;
+        }
+    };
 
     // Helper for Status Background Colors (Pastel)
     const getStatusColor = () => {
@@ -52,9 +65,19 @@ const FileCard: React.FC<FileCardProps> = ({
                 return 'bg-emerald-50/30 dark:bg-emerald-950/10 border-emerald-100 dark:border-emerald-900/30 hover:border-emerald-300';
             case FileStatus.ERROR:
                 return 'bg-rose-50/50 dark:bg-rose-950/20 border-rose-200 dark:border-rose-900/50 hover:border-rose-300';
+            case FileStatus.TRANSLATING:
+            case FileStatus.REVIEWING:
+            case FileStatus.EDITING:
+            case FileStatus.QA_CHECKING:
             case FileStatus.PROCESSING:
-            case FileStatus.REPAIRING:
                 return 'bg-sky-50/50 dark:bg-sky-950/20 border-sky-200 dark:border-sky-900/50 hover:border-sky-300 animate-pulse';
+            case FileStatus.QA_REPAIRING:
+            case FileStatus.REPAIRING:
+                return 'bg-purple-50/50 dark:bg-purple-950/20 border-purple-200 dark:border-purple-900/50 hover:border-purple-300 animate-pulse';
+            case FileStatus.TRANSLATED:
+            case FileStatus.REVIEWED:
+            case FileStatus.EDITED:
+                return 'bg-sky-50/30 dark:bg-sky-950/10 border-sky-100 dark:border-sky-900/30 hover:border-sky-300';
             default:
                 return 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-indigo-300 dark:hover:border-indigo-700';
         }
@@ -92,7 +115,7 @@ const FileCard: React.FC<FileCardProps> = ({
                                     <Clock className="w-2.5 h-2.5 text-slate-300 dark:text-slate-500" /> {(file.processingDuration / 1000).toFixed(1)}s
                                 </span>
                             ) : (
-                                <span className="text-slate-400">{file.status === FileStatus.IDLE ? 'Chờ dịch' : '...'}</span>
+                                <span className="text-slate-400">{getStatusLabel()}</span>
                             )}
                         </div>
                     </div>
@@ -127,7 +150,7 @@ const FileCard: React.FC<FileCardProps> = ({
                             {file.status === FileStatus.ERROR ? (
                                 <><AlertCircle className="w-2.5 h-2.5" /> {(file.errorMessage?.includes('an toàn') || file.errorMessage?.includes('Safety')) ? 'Safety Filter' : file.errorMessage?.includes('tiêu đề') ? 'Mất Header' : file.errorMessage?.includes('thiếu nội dung') ? 'Thiếu ND' : file.errorMessage?.includes('bịa đặt nội dung') ? 'Thừa ND' : file.errorMessage?.includes('chưa dịch hết') ? 'Sót Raw' : file.errorMessage?.includes('nhầm kết quả') ? 'Trả Nhầm' : 'Lỗi'}</>
                             ) : 
-                             isProcessing && hasContent ? 'Streaming...' : file.status}
+                             getStatusLabel()}
                         </span>
                     )}
 

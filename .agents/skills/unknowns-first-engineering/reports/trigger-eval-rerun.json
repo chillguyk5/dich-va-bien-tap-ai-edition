@@ -1,0 +1,255 @@
+{
+  "ok": true,
+  "threshold": 0.34,
+  "description_concepts": [
+    "complex_change",
+    "exclusions",
+    "high_risk",
+    "repository_work",
+    "verification"
+  ],
+  "missing_description_concepts": [],
+  "summary": {
+    "total": 18,
+    "passed": 18,
+    "false_positive": 0,
+    "false_negative": 0,
+    "pass_rate": 1.0
+  },
+  "failures": [],
+  "results": {
+    "should_trigger": [
+      {
+        "prompt": "Investigate this intermittent bug in the repository, reproduce it, find the root cause, implement the smallest fix, and add a regression test.",
+        "family": "debugging",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.6,
+        "matched_concepts": [
+          "complex_change",
+          "repository_work",
+          "verification"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "Điều tra lỗi ngẫu nhiên trong dự án này, tái hiện, tìm nguyên nhân gốc rồi sửa và kiểm thử hồi quy.",
+        "family": "debugging-vi",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.6,
+        "matched_concepts": [
+          "complex_change",
+          "repository_work",
+          "verification"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "Add a multi-step import feature to this codebase; inspect existing architecture and verify the runtime flow.",
+        "family": "feature",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.6,
+        "matched_concepts": [
+          "complex_change",
+          "repository_work",
+          "verification"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "Replace the failed payment provider integration in this repository and verify retries, webhook idempotency, and rollback behavior.",
+        "family": "api",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.8,
+        "matched_concepts": [
+          "complex_change",
+          "high_risk",
+          "repository_work",
+          "verification"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "Refactor authentication and authorization across the app without breaking existing sessions; include unauthorized-path tests.",
+        "family": "auth",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.4,
+        "matched_concepts": [
+          "complex_change",
+          "high_risk"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "Plan and implement a database migration for persistent customer data, including compatibility and rollback verification.",
+        "family": "database",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.6,
+        "matched_concepts": [
+          "complex_change",
+          "high_risk",
+          "verification"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "Diagnose why the CI/CD deployment fails only in production and verify the fix against logs and runtime configuration.",
+        "family": "deployment",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.4,
+        "matched_concepts": [
+          "high_risk",
+          "verification"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "Review this implementation plan for a public API refactor, identify hidden assumptions, compatibility risks, and missing verification.",
+        "family": "review",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.8,
+        "matched_concepts": [
+          "complex_change",
+          "high_risk",
+          "repository_work",
+          "verification"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "Change one line that controls whether production billing retries are idempotent; inspect the surrounding payment flow and verify retry behavior.",
+        "family": "local-high-risk",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.6,
+        "matched_concepts": [
+          "exclusions",
+          "high_risk",
+          "verification"
+        ],
+        "negative_pattern": null
+      }
+    ],
+    "should_not_trigger": [
+      {
+        "prompt": "Fix this typo in README: teh to the.",
+        "family": "typo",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.2,
+        "matched_concepts": [
+          "exclusions"
+        ],
+        "negative_pattern": "fix this typo"
+      },
+      {
+        "prompt": "Rename this label from Save to Lưu.",
+        "family": "label",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.0,
+        "matched_concepts": [],
+        "negative_pattern": "rename this label"
+      },
+      {
+        "prompt": "Where is the exact symbol BuildFormattedHanViet defined?",
+        "family": "lookup",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.2,
+        "matched_concepts": [
+          "exclusions"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "What is dependency injection?",
+        "family": "concept",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.0,
+        "matched_concepts": [],
+        "negative_pattern": "what is dependency injection"
+      },
+      {
+        "prompt": "Brainstorm only: what kinds of features could a note-taking app have?",
+        "family": "brainstorm",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.0,
+        "matched_concepts": [],
+        "negative_pattern": "brainstorm only"
+      },
+      {
+        "prompt": "Explain what a database index is in general, without looking at a project.",
+        "family": "explain",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.4,
+        "matched_concepts": [
+          "high_risk",
+          "repository_work"
+        ],
+        "negative_pattern": "in general"
+      }
+    ],
+    "near_neighbor": [
+      {
+        "prompt": "Explain the current filter-name function in this repository.",
+        "family": "simple-question",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.2,
+        "matched_concepts": [
+          "repository_work"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "Run the existing unit test named ParserHandlesEmptyInput and tell me whether it passes.",
+        "family": "exact-command",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.2,
+        "matched_concepts": [
+          "verification"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "Set TimeoutSeconds from 10 to 15 in config; no other changes.",
+        "family": "small-known-fix",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.0,
+        "matched_concepts": [],
+        "negative_pattern": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "package": {
+    "name": "unknowns-first-engineering",
+    "version": "3.1.1"
+  },
+  "skill": {
+    "name": "unknowns-first-engineering",
+    "version": "3.1.1",
+    "intent": "Increase correctness of non-trivial software engineering by inspecting the actual repository, resolving material uncertainty before irreversible work, choosing the smallest risk-appropriate action, and verifying outcomes with evidence.",
+    "target_users": [
+      "software engineers",
+      "coding agents",
+      "reviewers",
+      "maintainers"
+    ],
+    "inputs": [
+      "repository-backed engineering request",
+      "relevant code, configuration, tests, schemas, logs, runtime state, or authoritative documentation"
+    ],
+    "outputs": [
+      "evidence-grounded explanation, exploration, plan, implementation, review, or verification report"
+    ],
+    "exclusions": [
+      "typos",
+      "obvious one-line or local edits without material risk",
+      "exact symbol lookups",
+      "general concept explanations",
+      "translation or writing-only work",
+      "brainstorming without repository/runtime work"
+    ]
+  },
+  "mechanism": {
+    "loop": [
+      "Goal",
+      "Context and baseline",
+      "Unknowns",
+      "Smallest correct action",
+      "Verify",
+      "Learn or finish"
+    ],
+    "modes": [
+      "Explain",
+      "Explore",
+      "Plan",
+      "Implement",
+      "Review",
+      "Verify"
+    ],
+    "risk_paths": [
+      "Trivial",
+      "Standard",
+      "High-risk"
+    ],
+    "evidence_boundary": "A check is passed only if it actually ran; unavailable evidence remains explicitly unverified.",
+    "permission_boundary": "Destructive, shared-state, production, persistent-data, billing, deployment, and public-contract actions require explicit approval unless durably authorized."
+  },
+  "portability": {
+    "canonical_format": "agent-skills",
+    "targets": [
+      "claude",
+      "codex",
+      "generic"
+    ],
+    "host_assumptions": "none; adapters translate capability names and workflows"
+  },
+  "evidence": {
+    "trigger_eval": "reports/trigger-eval.json",
+    "trigger_cases": "evals/trigger_cases.json",
+    "prior_art": "reports/prior-art-research.md",
+    "creation_handoff": "reports/creation-handoff.md"
+  }
+}

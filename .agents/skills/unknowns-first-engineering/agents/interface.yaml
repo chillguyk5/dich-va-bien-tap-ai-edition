@@ -1,0 +1,51 @@
+interface:
+  display_name: "Unknowns-First Engineering"
+  short_description: "Inspect repository/runtime evidence, resolve material uncertainty, act surgically, and verify non-trivial software work"
+  default_prompt: "Use $unknowns-first-engineering for non-trivial repository work where hidden assumptions, architecture, integrations, security, data, deployment, concurrency, or verification materially affect correctness. Establish a baseline, infer Explain/Explore/Plan/Implement/Review/Verify mode, select the lightest risk-appropriate path, inspect only decision-relevant context, distinguish evidence from assumptions, make the smallest correct change, and report checks honestly. Do not invoke for typos, harmless one-line/local edits, exact symbol lookups, general concept explanations, translation, writing-only work, or brainstorming without repository/runtime work. A small change still triggers when it controls a high-risk boundary."
+  examples:
+    - "Investigate this intermittent repository bug, reproduce it, fix the root cause, and add a regression test"
+    - "Điều tra lỗi 403 trong codebase, đọc log và tìm giả định sai trước khi sửa"
+    - "Add this multi-step feature after inspecting the existing architecture, baseline tests, and runtime flow"
+    - "Replace this failed API provider and verify timeout, retry, idempotency, and failure behavior"
+    - "Review this payment webhook plan for idempotency, race conditions, and rollback"
+    - "Explain the current function in this repository"
+compatibility:
+  canonical_format: "agent-skills"
+  adapter_targets:
+    - "claude"
+    - "codex"
+    - "generic"
+  target_aliases:
+    claude-code: "claude"
+    openai-codex: "codex"
+    openai: "codex"
+    generic-agent: "generic"
+    agent-skills-compatible: "canonical-format"
+  activation:
+    mode: "automatic-or-manual"
+    paths: []
+  execution:
+    context: "inline"
+    shell: "host-dependent"
+  trust:
+    source_tier: "local"
+    remote_inline_execution: "forbid"
+    generated_claims: "evidence-bound"
+  permissions:
+    network: "only when authoritative external documentation or provider evidence is material and allowed"
+    file_write: "only in Implement mode and within user scope"
+    subprocess: "targeted validation, build, test, runtime, diagnostic, and version-control inspection commands"
+    interactive: "only when user authentication or an essential user decision requires it"
+  degradation:
+    claude: "use adapters/claude-code.md when relevant"
+    codex: "use adapters/codex.md when relevant"
+    generic: "use adapters/generic-agent.md"
+gates:
+  production:
+    - "routing description contains positive and negative boundaries"
+    - "baseline and risk selection are explicit for material work"
+    - "only one discoverable root SKILL.md"
+    - "package validator, trigger eval, and secret scan pass"
+    - "trigger eval covers should-trigger, should-not-trigger, and near-neighbor cases"
+    - "risk-proportionate workflow and evidence-bound verification claims"
+    - "destructive and shared-state actions require approval"

@@ -1,0 +1,150 @@
+{
+  "schema_version": "2.0.0-qiaomu-lite",
+  "generated_at": "2026-08-05",
+  "package": {
+    "name": "unknowns-first-engineering",
+    "version": "3.1.1",
+    "owner": "Fox",
+    "maturity_tier": "production-candidate",
+    "lifecycle_stage": "production",
+    "upstream_inspiration": null,
+    "upstream_sync": {}
+  },
+  "intent": {
+    "description": "Use to investigate, plan, implement, review, or verify non-trivial software engineering where repository or runtime evidence materially affects correctness: complex or intermittent bugs, multi-step features, shared-interface refactors, API/provider integrations, authentication or authorization, payments, database migrations, persistent data, concurrency, CI/CD, deployment, security boundaries, or small edits that control a high-risk boundary. Do not trigger for typos, harmless one-line/local edits, exact symbol lookups, general concept explanations, translation, writing-only work, or brainstorming without a repository/runtime decision.",
+    "job_to_be_done": "Use to investigate, plan, implement, review, or verify non-trivial software engineering where repository or runtime evidence materially affects correctness: complex or intermittent bugs, multi-step features, shared-interface refactors, API/provider integrations, authentication or authorization, payments, database migrations, persistent data, concurrency, CI/CD, deployment, security boundaries, or small edits that control a high-risk boundary. Do not trigger for typos, harmless one-line/local edits, exact symbol lookups, general concept explanations, translation, writing-only work, or brainstorming without a repository/runtime decision.",
+    "target_users": [
+      "Qiaomu operator"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "exclusions": [],
+    "qiaomu_defaults": {}
+  },
+  "triggers": {
+    "should_trigger": [
+      "Investigate this intermittent bug in the repository, reproduce it, find the root cause, implement one fix, and add a regression test.",
+      "Điều tra lỗi ngẫu nhiên trong dự án này, tái hiện, tìm nguyên nhân gốc rồi sửa và kiểm thử hồi quy.",
+      "Add a multi-step feature to this codebase after inspecting the architecture, baseline tests, and runtime flow.",
+      "Thêm tính năng nhiều bước vào mã nguồn này, kiểm tra kiến trúc và chạy thật trước khi kết luận.",
+      "Replace the failed API provider integration in this repository and verify timeout, retry, error schema, and fallback behavior.",
+      "Refactor authentication and authorization across the codebase without breaking existing sessions; include unauthorized-path tests.",
+      "Tích hợp payment webhook trong repo, kiểm tra idempotency, duplicate delivery, race condition và rollback.",
+      "Plan and implement a database migration for persistent data, including legacy compatibility, concurrency, and rollback verification.",
+      "Diagnose why CI/CD deployment fails only in production and verify the fix against logs and runtime configuration.",
+      "Review this implementation plan for a public API refactor, identify hidden assumptions, compatibility risks, and missing verification.",
+      "Xác minh commit này thực sự sửa race condition và không làm hỏng các test cũ hoặc runtime path.",
+      "Change one line controlling production billing retry idempotency; inspect the payment flow and verify duplicate behavior.",
+      "Sửa một dòng kiểm soát phân quyền production; đọc codebase xung quanh và kiểm thử unauthorized path."
+    ],
+    "should_not_trigger": [
+      "Fix this typo in README: teh to the.",
+      "Rename this label from Save to Lưu.",
+      "Where is the exact symbol BuildFormattedHanViet defined?",
+      "Just explain what dependency injection is in general.",
+      "Dịch đoạn tiếng Trung này sang tiếng Việt, chỉ dịch.",
+      "Writing only: rewrite this email to sound more polite.",
+      "Brainstorm only: suggest names for a note-taking app.",
+      "Regex đơn giản để xóa dòng trùng trong Notepad++.",
+      "Tạo outline kiến trúc chung cho ứng dụng mẫu, chưa có repo hay yêu cầu triển khai.",
+      "Plan a generic learning roadmap for software engineering."
+    ],
+    "near_neighbor": [
+      "Explain the current filter-name function in this repository.",
+      "Run the existing unit test named ParserHandlesEmptyInput and tell me whether it passes.",
+      "Set TimeoutSeconds from 10 to 15 in config; no other changes.",
+      "Review ngữ pháp README này, không cần xem codebase.",
+      "Review nội dung bài blog kỹ thuật này, chỉ viết lại cho dễ đọc."
+    ]
+  },
+  "workflow": {
+    "router_rules": [],
+    "compact_workflow": [],
+    "gate_ladder": [],
+    "output_contract": []
+  },
+  "resources": {
+    "references": [
+      "references\\coordination.md",
+      "references\\discovery.md",
+      "references\\implementation.md",
+      "references\\layer-diagnosis.md",
+      "references\\loop-engineering.md",
+      "references\\operating-model.md",
+      "references\\planning.md",
+      "references\\teach-back.md",
+      "references\\verification.md"
+    ],
+    "scripts": [
+      "scripts\\evaluate_triggers.py",
+      "scripts\\secret_scan.py",
+      "scripts\\validate_package.py"
+    ],
+    "evals": [
+      "evals\\output_cases.json",
+      "evals\\trigger_cases.json"
+    ],
+    "reports": [
+      "reports\\creation-handoff.md",
+      "reports\\output-eval-plan.md",
+      "reports\\package-validation.json",
+      "reports\\prior-art-research.md",
+      "reports\\qiaomu-validate.json",
+      "reports\\release-check.md",
+      "reports\\secret-scan.json",
+      "reports\\skill-ir.json",
+      "reports\\trigger-eval-2026-08-05.json",
+      "reports\\trigger-eval-rerun.json",
+      "reports\\trigger-eval.json"
+    ]
+  },
+  "portability": {
+    "canonical_format": "agent-skills",
+    "adapter_targets": [
+      "claude",
+      "codex",
+      "generic"
+    ],
+    "activation": {
+      "mode": "automatic-or-manual",
+      "paths": []
+    },
+    "execution": {
+      "context": "inline",
+      "shell": "host-dependent"
+    },
+    "trust": {
+      "source_tier": "local",
+      "remote_inline_execution": "forbid",
+      "generated_claims": "evidence-bound"
+    },
+    "permissions": {
+      "network": "only when authoritative external documentation or provider evidence is material and allowed",
+      "file_write": "only in Implement mode and within user scope",
+      "subprocess": "targeted validation, build, test, runtime, diagnostic, and version-control inspection commands",
+      "interactive": "only when user authentication or an essential user decision requires it"
+    },
+    "degradation": {
+      "claude": "use adapters/claude-code.md when relevant",
+      "codex": "use adapters/codex.md when relevant",
+      "generic": "use adapters/generic-agent.md"
+    }
+  },
+  "gates": {
+    "production": [
+      "routing description contains positive and negative boundaries",
+      "baseline and risk selection are explicit for material work",
+      "only one discoverable root SKILL.md",
+      "package validator, trigger eval, and secret scan pass",
+      "trigger eval covers should-trigger, should-not-trigger, and near-neighbor cases",
+      "risk-proportionate workflow and evidence-bound verification claims",
+      "destructive and shared-state actions require approval"
+    ]
+  },
+  "evidence_boundary": {
+    "generated_reports_are_evidence": true,
+    "planned_work_is_evidence": false,
+    "missing_external_or_human_evidence_label": "missing evidence",
+    "public_claim_policy": "claim only what local validation, install proof, human review, or provider-backed evidence actually supports"
+  }
+}

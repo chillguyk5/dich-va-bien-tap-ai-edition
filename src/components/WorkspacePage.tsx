@@ -80,7 +80,11 @@ export const WorkspacePage: React.FC<WorkspacePageProps> = (props) => {
             error: props.files.filter(f => f.status === FileStatus.ERROR && !f.errorMessage?.includes("English")).length,
             english: props.files.filter(f => f.status === FileStatus.ERROR && f.errorMessage?.includes("English")).length,
             short: props.files.filter(f => f.content.length < 1200).length,
-            processing: props.files.filter(f => f.status === FileStatus.PROCESSING || f.status === FileStatus.REPAIRING).length,
+            processing: props.files.filter(f => 
+                f.status === FileStatus.PROCESSING || f.status === FileStatus.REPAIRING ||
+                f.status === FileStatus.TRANSLATING || f.status === FileStatus.REVIEWING ||
+                f.status === FileStatus.EDITING || f.status === FileStatus.QA_CHECKING || f.status === FileStatus.QA_REPAIRING
+            ).length,
             
             unchanged: props.files.filter(f => 
                 f.status === FileStatus.COMPLETED && 
@@ -150,7 +154,9 @@ export const WorkspacePage: React.FC<WorkspacePageProps> = (props) => {
                     const isEnglishError = isError && f.errorMessage?.includes("English");
                     const isRaw = isCompleted && f.remainingRawCharCount > 0;
                     const isClean = isCompleted && f.remainingRawCharCount === 0;
-                    const isProcessing = f.status === FileStatus.PROCESSING || f.status === FileStatus.REPAIRING;
+                    const isProcessing = f.status === FileStatus.PROCESSING || f.status === FileStatus.REPAIRING ||
+                        f.status === FileStatus.TRANSLATING || f.status === FileStatus.REVIEWING ||
+                        f.status === FileStatus.EDITING || f.status === FileStatus.QA_CHECKING || f.status === FileStatus.QA_REPAIRING;
                     const isPending = f.status === FileStatus.IDLE;
                     const isShort = f.content.length < 1200;
                     const isUnchanged = isCompleted && f.translatedContent?.trim() === f.content.trim();

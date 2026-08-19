@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0",
+  "evaluator_version": "3.1.1",
+  "recommended_threshold": 0.4,
+  "description_required_concepts": ["software_work", "repo_evidence", "engineering_action", "material_risk", "exclusions"],
+  "positive_concepts": {
+    "software_work": ["software", "engineering", "feature", "bug", "refactor", "api", "payment", "webhook", "migration", "deployment", "code", "tính năng", "lỗi", "tích hợp", "thanh toán", "triển khai"],
+    "repo_evidence": ["repository", "repo", "runtime", "codebase", "implementation", "tests", "logs", "git", "mã nguồn", "dự án", "kiểm thử", "chạy thật"],
+    "engineering_action": ["implement", "diagnose", "fix", "review", "plan", "verify", "integrate", "migrate", "refactor", "add", "investigate", "sửa", "xác minh", "lập kế hoạch", "thêm", "điều tra"],
+    "material_risk": ["non-trivial", "complex", "intermittent", "architecture", "security", "authentication", "authorization", "persistent data", "public api", "production", "concurrency", "race condition", "idempotency", "billing", "database", "phức tạp", "ngẫu nhiên", "kiến trúc", "bảo mật", "dữ liệu", "race", "xác thực", "phân quyền"],
+    "verification": ["verify", "verification", "reproduce", "regression", "test", "runtime", "logs", "rollback", "retry", "xác minh", "tái hiện", "kiểm thử", "chạy thật", "hoàn tác"],
+    "exclusions": ["do not trigger", "typo", "one-line", "local edit", "exact symbol", "general concept", "translation", "writing-only", "brainstorming", "harmless", "không kích hoạt", "lỗi chính tả", "một dòng", "cục bộ", "symbol chính xác", "khái niệm chung", "dịch thuật"]
+  },
+  "negative_patterns": [
+    "fix this typo", "sửa lỗi chính tả", "rename this label", "đổi nhãn này", "where is the exact symbol", "tìm symbol chính xác", "chỉ giải thích", "just explain", "in general", "without looking at a project", "chỉ dịch", "translate only", "writing only", "chỉ viết lại", "brainstorm only", "brainstorm thôi", "regex đơn giản", "không cần xem repo", "không cần xem codebase", "do not inspect repository", "chưa có repo", "generic learning roadmap", "one line only"
+  ],
+  "should_trigger": [
+    {"id":"debug-en","family":"debugging","text":"Investigate this intermittent bug in the repository, reproduce it, find the root cause, implement one fix, and add a regression test."},
+    {"id":"debug-vi","family":"debugging","text":"Điều tra lỗi ngẫu nhiên trong dự án này, tái hiện, tìm nguyên nhân gốc rồi sửa và kiểm thử hồi quy."},
+    {"id":"feature-en","family":"feature","text":"Add a multi-step feature to this codebase after inspecting the architecture, baseline tests, and runtime flow."},
+    {"id":"feature-vi","family":"feature","text":"Thêm tính năng nhiều bước vào mã nguồn này, kiểm tra kiến trúc và chạy thật trước khi kết luận."},
+    {"id":"api-provider","family":"api","text":"Replace the failed API provider integration in this repository and verify timeout, retry, error schema, and fallback behavior."},
+    {"id":"auth-refactor","family":"auth","text":"Refactor authentication and authorization across the codebase without breaking existing sessions; include unauthorized-path tests."},
+    {"id":"payment-webhook","family":"payment","text":"Tích hợp payment webhook trong repo, kiểm tra idempotency, duplicate delivery, race condition và rollback."},
+    {"id":"database-migration","family":"database","text":"Plan and implement a database migration for persistent data, including legacy compatibility, concurrency, and rollback verification."},
+    {"id":"cicd-production","family":"deployment","text":"Diagnose why CI/CD deployment fails only in production and verify the fix against logs and runtime configuration."},
+    {"id":"plan-review","family":"review","text":"Review this implementation plan for a public API refactor, identify hidden assumptions, compatibility risks, and missing verification."},
+    {"id":"existing-change","family":"verification","text":"Xác minh commit này thực sự sửa race condition và không làm hỏng các test cũ hoặc runtime path."},
+    {"id":"one-line-billing","family":"local-high-risk","text":"Change one line controlling production billing retry idempotency; inspect the payment flow and verify duplicate behavior."},
+    {"id":"one-line-auth","family":"local-high-risk","text":"Sửa một dòng kiểm soát phân quyền production; đọc codebase xung quanh và kiểm thử unauthorized path."}
+  ],
+  "should_not_trigger": [
+    {"id":"typo","family":"typo","text":"Fix this typo in README: teh to the."},
+    {"id":"label","family":"label","text":"Rename this label from Save to Lưu."},
+    {"id":"lookup","family":"lookup","text":"Where is the exact symbol BuildFormattedHanViet defined?"},
+    {"id":"concept","family":"concept","text":"Just explain what dependency injection is in general."},
+    {"id":"translation","family":"translation","text":"Dịch đoạn tiếng Trung này sang tiếng Việt, chỉ dịch."},
+    {"id":"writing","family":"writing","text":"Writing only: rewrite this email to sound more polite."},
+    {"id":"brainstorm","family":"brainstorm","text":"Brainstorm only: suggest names for a note-taking app."},
+    {"id":"regex","family":"regex","text":"Regex đơn giản để xóa dòng trùng trong Notepad++."},
+    {"id":"generic-architecture","family":"architecture","text":"Tạo outline kiến trúc chung cho ứng dụng mẫu, chưa có repo hay yêu cầu triển khai."},
+    {"id":"learning-roadmap","family":"learning","text":"Plan a generic learning roadmap for software engineering."}
+  ],
+  "near_neighbor": [
+    {"id":"repo-explanation","family":"explain","text":"Explain the current filter-name function in this repository."},
+    {"id":"named-test","family":"exact-command","text":"Run the existing unit test named ParserHandlesEmptyInput and tell me whether it passes."},
+    {"id":"harmless-config","family":"small-known-fix","text":"Set TimeoutSeconds from 10 to 15 in config; no other changes."},
+    {"id":"readme-copyedit","family":"content-review","text":"Review ngữ pháp README này, không cần xem codebase."},
+    {"id":"blog-review","family":"content-review","text":"Review nội dung bài blog kỹ thuật này, chỉ viết lại cho dễ đọc."}
+  ]
+}

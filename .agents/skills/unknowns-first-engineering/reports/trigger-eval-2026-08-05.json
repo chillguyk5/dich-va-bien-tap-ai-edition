@@ -1,0 +1,438 @@
+{
+  "ok": true,
+  "package_version": "3.1.1",
+  "evaluator_version": "3.1.1",
+  "fixture_schema_version": "1.0",
+  "threshold": 0.4,
+  "description_concepts": [
+    "engineering_action",
+    "exclusions",
+    "material_risk",
+    "repo_evidence",
+    "software_work",
+    "verification"
+  ],
+  "missing_description_concepts": [],
+  "duplicate_or_missing_case_ids": [],
+  "summary": {
+    "total": 28,
+    "passed": 28,
+    "false_positive": 0,
+    "false_negative": 0,
+    "pass_rate": 1.0
+  },
+  "failures": [],
+  "results": {
+    "should_trigger": [
+      {
+        "id": "debug-en",
+        "prompt": "Investigate this intermittent bug in the repository, reproduce it, find the root cause, implement one fix, and add a regression test.",
+        "family": "debugging",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 1.0,
+        "matched_concepts": [
+          "engineering_action",
+          "material_risk",
+          "repo_evidence",
+          "software_work",
+          "verification"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "id": "debug-vi",
+        "prompt": "Điều tra lỗi ngẫu nhiên trong dự án này, tái hiện, tìm nguyên nhân gốc rồi sửa và kiểm thử hồi quy.",
+        "family": "debugging",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 1.0,
+        "matched_concepts": [
+          "engineering_action",
+          "material_risk",
+          "repo_evidence",
+          "software_work",
+          "verification"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "id": "feature-en",
+        "prompt": "Add a multi-step feature to this codebase after inspecting the architecture, baseline tests, and runtime flow.",
+        "family": "feature",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 1.0,
+        "matched_concepts": [
+          "engineering_action",
+          "material_risk",
+          "repo_evidence",
+          "software_work",
+          "verification"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "id": "feature-vi",
+        "prompt": "Thêm tính năng nhiều bước vào mã nguồn này, kiểm tra kiến trúc và chạy thật trước khi kết luận.",
+        "family": "feature",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 1.0,
+        "matched_concepts": [
+          "engineering_action",
+          "material_risk",
+          "repo_evidence",
+          "software_work",
+          "verification"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "id": "api-provider",
+        "prompt": "Replace the failed API provider integration in this repository and verify timeout, retry, error schema, and fallback behavior.",
+        "family": "api",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.8,
+        "matched_concepts": [
+          "engineering_action",
+          "repo_evidence",
+          "software_work",
+          "verification"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "id": "auth-refactor",
+        "prompt": "Refactor authentication and authorization across the codebase without breaking existing sessions; include unauthorized-path tests.",
+        "family": "auth",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.8,
+        "matched_concepts": [
+          "engineering_action",
+          "material_risk",
+          "repo_evidence",
+          "software_work"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "id": "payment-webhook",
+        "prompt": "Tích hợp payment webhook trong repo, kiểm tra idempotency, duplicate delivery, race condition và rollback.",
+        "family": "payment",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.8,
+        "matched_concepts": [
+          "material_risk",
+          "repo_evidence",
+          "software_work",
+          "verification"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "id": "database-migration",
+        "prompt": "Plan and implement a database migration for persistent data, including legacy compatibility, concurrency, and rollback verification.",
+        "family": "database",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.8,
+        "matched_concepts": [
+          "engineering_action",
+          "material_risk",
+          "software_work",
+          "verification"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "id": "cicd-production",
+        "prompt": "Diagnose why CI/CD deployment fails only in production and verify the fix against logs and runtime configuration.",
+        "family": "deployment",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 1.0,
+        "matched_concepts": [
+          "engineering_action",
+          "material_risk",
+          "repo_evidence",
+          "software_work",
+          "verification"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "id": "plan-review",
+        "prompt": "Review this implementation plan for a public API refactor, identify hidden assumptions, compatibility risks, and missing verification.",
+        "family": "review",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 1.0,
+        "matched_concepts": [
+          "engineering_action",
+          "material_risk",
+          "repo_evidence",
+          "software_work",
+          "verification"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "id": "existing-change",
+        "prompt": "Xác minh commit này thực sự sửa race condition và không làm hỏng các test cũ hoặc runtime path.",
+        "family": "verification",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.8,
+        "matched_concepts": [
+          "engineering_action",
+          "material_risk",
+          "repo_evidence",
+          "verification"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "id": "one-line-billing",
+        "prompt": "Change one line controlling production billing retry idempotency; inspect the payment flow and verify duplicate behavior.",
+        "family": "local-high-risk",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 1.0,
+        "matched_concepts": [
+          "engineering_action",
+          "exclusions",
+          "material_risk",
+          "software_work",
+          "verification"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "id": "one-line-auth",
+        "prompt": "Sửa một dòng kiểm soát phân quyền production; đọc codebase xung quanh và kiểm thử unauthorized path.",
+        "family": "local-high-risk",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 1.0,
+        "matched_concepts": [
+          "engineering_action",
+          "exclusions",
+          "material_risk",
+          "repo_evidence",
+          "verification"
+        ],
+        "negative_pattern": null
+      }
+    ],
+    "should_not_trigger": [
+      {
+        "id": "typo",
+        "prompt": "Fix this typo in README: teh to the.",
+        "family": "typo",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.4,
+        "matched_concepts": [
+          "engineering_action",
+          "exclusions"
+        ],
+        "negative_pattern": "fix this typo"
+      },
+      {
+        "id": "label",
+        "prompt": "Rename this label from Save to Lưu.",
+        "family": "label",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.0,
+        "matched_concepts": [],
+        "negative_pattern": "rename this label"
+      },
+      {
+        "id": "lookup",
+        "prompt": "Where is the exact symbol BuildFormattedHanViet defined?",
+        "family": "lookup",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.2,
+        "matched_concepts": [
+          "exclusions"
+        ],
+        "negative_pattern": "where is the exact symbol"
+      },
+      {
+        "id": "concept",
+        "prompt": "Just explain what dependency injection is in general.",
+        "family": "concept",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.0,
+        "matched_concepts": [],
+        "negative_pattern": "just explain"
+      },
+      {
+        "id": "translation",
+        "prompt": "Dịch đoạn tiếng Trung này sang tiếng Việt, chỉ dịch.",
+        "family": "translation",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.0,
+        "matched_concepts": [],
+        "negative_pattern": "chỉ dịch"
+      },
+      {
+        "id": "writing",
+        "prompt": "Writing only: rewrite this email to sound more polite.",
+        "family": "writing",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.2,
+        "matched_concepts": [
+          "exclusions"
+        ],
+        "negative_pattern": "writing only"
+      },
+      {
+        "id": "brainstorm",
+        "prompt": "Brainstorm only: suggest names for a note-taking app.",
+        "family": "brainstorm",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.0,
+        "matched_concepts": [],
+        "negative_pattern": "brainstorm only"
+      },
+      {
+        "id": "regex",
+        "prompt": "Regex đơn giản để xóa dòng trùng trong Notepad++.",
+        "family": "regex",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.0,
+        "matched_concepts": [],
+        "negative_pattern": "regex đơn giản"
+      },
+      {
+        "id": "generic-architecture",
+        "prompt": "Tạo outline kiến trúc chung cho ứng dụng mẫu, chưa có repo hay yêu cầu triển khai.",
+        "family": "architecture",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.6,
+        "matched_concepts": [
+          "material_risk",
+          "repo_evidence",
+          "software_work"
+        ],
+        "negative_pattern": "chưa có repo"
+      },
+      {
+        "id": "learning-roadmap",
+        "prompt": "Plan a generic learning roadmap for software engineering.",
+        "family": "learning",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.4,
+        "matched_concepts": [
+          "engineering_action",
+          "software_work"
+        ],
+        "negative_pattern": "generic learning roadmap"
+      }
+    ],
+    "near_neighbor": [
+      {
+        "id": "repo-explanation",
+        "prompt": "Explain the current filter-name function in this repository.",
+        "family": "explain",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.2,
+        "matched_concepts": [
+          "repo_evidence"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "id": "named-test",
+        "prompt": "Run the existing unit test named ParserHandlesEmptyInput and tell me whether it passes.",
+        "family": "exact-command",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.2,
+        "matched_concepts": [
+          "verification"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "id": "harmless-config",
+        "prompt": "Set TimeoutSeconds from 10 to 15 in config; no other changes.",
+        "family": "small-known-fix",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.0,
+        "matched_concepts": [],
+        "negative_pattern": null
+      },
+      {
+        "id": "readme-copyedit",
+        "prompt": "Review ngữ pháp README này, không cần xem codebase.",
+        "family": "content-review",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.4,
+        "matched_concepts": [
+          "engineering_action",
+          "repo_evidence"
+        ],
+        "negative_pattern": "không cần xem codebase"
+      },
+      {
+        "id": "blog-review",
+        "prompt": "Review nội dung bài blog kỹ thuật này, chỉ viết lại cho dễ đọc.",
+        "family": "content-review",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.2,
+        "matched_concepts": [
+          "engineering_action"
+        ],
+        "negative_pattern": "chỉ viết lại"
+      }
+    ]
+  },
+  "claim_boundary": "Deterministic fixture conformance only; not host routing or output-quality evidence."
+}

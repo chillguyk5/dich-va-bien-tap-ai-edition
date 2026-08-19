@@ -1,0 +1,4 @@
+interface:
+  display_name: "Unknowns-First Engineering"
+  short_description: "Repository-grounded workflow for non-trivial changes"
+  default_prompt: "Inspect the actual repository/runtime and baseline, resolve high-impact unknowns, choose the lightest risk-appropriate mode, make the smallest correct change, and verify affected behavior. Do not invoke for harmless mechanical edits, exact lookups, general explanations, translation, writing-only work, or generic brainstorming. Small changes still trigger when they control a material security, billing, data, concurrency, deployment, or public-contract boundary."
